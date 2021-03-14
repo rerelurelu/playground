@@ -12,9 +12,7 @@ let fileSrc = {
 
 gulp.task('css', function () {
   let plugins = [
-      autoprefixer({
-        browsers: ['last 2 version']
-      })
+      autoprefixer()
   ];
 
   return gulp.src(`${fileSrc.stylus}`)
