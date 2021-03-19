@@ -3,3 +3,6 @@ node_modules
 
 # media files
 images/
+
+# css files
+*.css.map
