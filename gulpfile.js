@@ -1,26 +1,44 @@
-// Plugins
-let gulp = require('gulp');
-let postcss = require('gulp-postcss');
-let autoprefixer = require('autoprefixer');
-let fibers = require('fibers');
-let sass = require('gulp-sass');
+/* eslint-disable import/no-extraneous-dependencies */
+/* Plugins */
+const chalk = require('chalk');
+const {
+  src, dest, watch, lastRun,
+} = require('gulp');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const fibers = require('fibers');
+const sass = require('gulp-sass');
+const cssnano = require('cssnano');
 sass.compiler = require('dart-sass');
 
-// Path
-let filePath = {src: 'src/', dist: 'dist/'};
-let fileSrc = {
-  sass: `${filePath.src}sass/*.sass`
+/* Path */
+const filePath = {
+  src: 'src/sass/*.sass',
+  dist: 'dist/css/',
 };
 
-gulp.task('css', function () {
-  let plugins = [
-      autoprefixer()
-  ];
+/* compile sass into css */
+const compileSass = (cb) => {
+  src(filePath.src, { sourcemaps: true, since: lastRun(compileSass) })
+    .pipe(sass({ fiber: fibers }))
+    .pipe(postcss([
+      autoprefixer(),
+      cssnano({
+        autoprefixer: false,
+      }),
+    ]))
+    .pipe(dest(filePath.dist, { sourcemaps: '.' }));
+  cb();
+};
 
-  return gulp.src(`${fileSrc.sass}`)
-        .pipe(sass(
-          { fiber: fibers }
-        ))
-        .pipe(postcss(plugins))
-        .pipe(gulp.dest(`${filePath.dist}css/`));
-});
+/* Watch task */
+const watchSassFiles = () => {
+  const watcher = watch(filePath.src, compileSass);
+  const messageLog = chalk.italic.bold.hex('#7cc7e8');
+
+  watcher.on('change', (path) => {
+    console.log(messageLog(`File ${path} has been changed, running task...`));
+  });
+};
+
+exports.sassc = watchSassFiles;
