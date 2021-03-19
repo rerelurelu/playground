@@ -41,4 +41,5 @@ const watchSassFiles = () => {
   });
 };
 
-exports.sassc = watchSassFiles;
+exports.sassw = watchSassFiles;
+exports.sassc = compileSass;
