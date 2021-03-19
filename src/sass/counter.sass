@@ -1,0 +1,47 @@
+@use "var/vars" as v
+
+
+.section
+  padding: 5rem 0
+
+.section-center
+  width: 90vw
+  margin: 0 auto
+  max-width: 1170px
+
+@media screen and (min-width: 992px)
+  .section-center
+    width: 95vw
+
+main
+  min-height: 100vh
+  display: grid
+  place-items: center
+  min-height: 100vh
+  display: grid
+  place-items: center
+
+.container
+  text-align: center
+
+#value
+  font-size: 6rem
+  font-weight: bold
+
+.btn
+  text-transform: uppercase
+  background: transparent
+  color: v.$clr-black
+  padding: 0.375rem 0.75rem
+  letter-spacing: v.$spacing
+  display: inline-block
+  transition: v.$transition
+  font-size: 0.875rem
+  border: 2px solid v.$clr-black
+  cursor: pointer
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
+  border-radius: v.$radius
+  margin: 0.5rem
+  &:hover
+    color: v.$clr-white
+    background: v.$clr-black
