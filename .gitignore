@@ -4,5 +4,6 @@ node_modules
 # media files
 images/
 
-# css files
+# map files
 *.css.map
+*.js.map
