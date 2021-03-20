@@ -9,7 +9,7 @@ const autoprefixer = require('autoprefixer');
 const fibers = require('fibers');
 const sass = require('gulp-sass');
 const cssnano = require('cssnano');
-sass.compiler = require('dart-sass');
+sass.compiler = require('sass');
 
 /* Path */
 const filePath = {
