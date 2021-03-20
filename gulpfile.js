@@ -71,15 +71,26 @@ const browsersyncReload = (cb) => {
 
 /* Watch task */
 const watchTask = () => {
-  watch(fileSrc.html, browsersyncReload);
+  const htmlWatcher = watch(fileSrc.html, browsersyncReload);
 
-  const watcher = watch([fileSrc.sass, fileSrc.js],
-    series(compileSass, compileJs, browsersyncReload));
+  const sassWatcher = watch(fileSrc.sass,
+    series(compileSass, browsersyncReload));
+
+  const jsWatcher = watch(fileSrc.js,
+    series(compileJs, browsersyncReload));
 
   const messageLog = chalk.italic.bold.hex('#7cc7e8');
 
-  watcher.on('change', (path) => {
-    console.log(messageLog(`File ${path} has been changed, running task...`));
+  sassWatcher.on('change', (path) => {
+    console.log(messageLog(`File ${path} has been changed, running Sass task...`));
+  });
+
+  jsWatcher.on('change', (path) => {
+    console.log(messageLog(`File ${path} has been changed, running JS task...`));
+  });
+
+  htmlWatcher.on('change', (path) => {
+    console.log(messageLog(`File ${path} has been changed, running HTML task...`));
   });
 };
 
