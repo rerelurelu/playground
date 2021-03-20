@@ -4,7 +4,7 @@ const reviews = [
     id: 1,
     author: 'Nelly Virsaladze',
     job: 'Designer',
-    img: 
+    img:
       'https://res.cloudinary.com/zoniha/image/upload/'
       + 'v1615732427/Reviews/person-1_jrv5uu.jpg',
     info:
@@ -16,7 +16,7 @@ const reviews = [
     id: 2,
     author: 'Kawa Da',
     job: 'Developer',
-    img: 
+    img:
       'https://res.cloudinary.com/zoniha/image/upload/'
       + 'v1615732427/Reviews/person-2_mjkqbc.jpg',
     info:
@@ -29,7 +29,7 @@ const reviews = [
     id: 3,
     author: 'Zoni Ha',
     job: 'Data Scientist',
-    img: 
+    img:
       'https://res.cloudinary.com/zoniha/image/upload/'
       + 'v1615732427/Reviews/person-3_cjgyco.jpg',
     info:
@@ -37,60 +37,59 @@ const reviews = [
       + 'ante sem semper ligula, id tristique nunc ex sit amet velit.'
       + 'Donec eu massa sit amet libero aliquet tempus.',
   },
-]
+];
 
 // Select items
-const img = document.getElementById('person-img')
-const author = document.getElementById('author')
-const job = document.getElementById('job')
-const info = document.getElementById('info')
+const img = document.getElementById('person-img');
+const author = document.getElementById('author');
+const job = document.getElementById('job');
+const info = document.getElementById('info');
 
-const prevBtn = document.querySelector('.prev-btn')
-const nextBtn = document.querySelector('.next-btn')
-const randomBtn = document.querySelector('.random-btn')
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const randomBtn = document.querySelector('.random-btn');
 
 // Set starting item
-let currentItem = 0
+let currentItem = 0;
 
-// Load initial item
-window.addEventListener('DOMContentLoaded', function () {
-  showPerson()
-})
-
-
-function showPerson () {
-  const item = reviews[currentItem]
-  img.src = item.img
-  author.textContent = item.author
-  job.textContent = item.job
-  info.textContent = item.info
+function showPerson() {
+  const item = reviews[currentItem];
+  img.src = item.img;
+  author.textContent = item.author;
+  job.textContent = item.job;
+  info.textContent = item.info;
 }
 
-nextBtn.addEventListener('click', function () {
+// Load initial item
+window.addEventListener('DOMContentLoaded', () => {
+  showPerson();
+});
+
+nextBtn.addEventListener('click', () => {
   /* Show next person */
-  currentItem++
-  
+  currentItem += 1;
+
   if (currentItem > reviews.length - 1) {
-    currentItem = 0
+    currentItem = 0;
   }
-  showPerson()
-})
+  showPerson();
+});
 
-prevBtn.addEventListener('click', function () {
+prevBtn.addEventListener('click', () => {
   /* Show previous person */
-  currentItem--
-  
-  if (currentItem < 0 ) {
-    currentItem = reviews.length - 1
-  }
-  showPerson()
-})
+  currentItem -= 1;
 
-randomBtn.addEventListener('click', function () {
-  /* Show person randomly */
-  i = currentItem
-  while (i === currentItem){
-    currentItem = Math.floor(Math.random() * reviews.length)
+  if (currentItem < 0) {
+    currentItem = reviews.length - 1;
   }
-  showPerson()
-})
+  showPerson();
+});
+
+randomBtn.addEventListener('click', () => {
+  /* Show person randomly */
+  const i = currentItem;
+  while (i === currentItem) {
+    currentItem = Math.floor(Math.random() * reviews.length);
+  }
+  showPerson();
+});
