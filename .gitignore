@@ -3,6 +3,7 @@ node_modules
 
 # media files
 images/
+movie/
 
 # map files
 *.css.map
